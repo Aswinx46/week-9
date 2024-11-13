@@ -6,6 +6,10 @@ import SignIn from './components/Sign in/SignIn'
 import SignUp from './components/Sign up/signup'
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import Home from './components/home/home'
+import ProtectedRoute from './components/protectedRoute/protectedRoute'
+import Profile from './components/profilePage/profile'
+import AdminLogin from './components/admin/adminLogin'
+import AdminHome from './components/admin/adminHome'
 function App() {
 
 
@@ -15,8 +19,13 @@ function App() {
 
     <Route path='/' element={<SignIn/>}></Route>
     <Route path='/signup' element={<SignUp/>}></Route>
-    <Route path='/home' element={<Home/>}></Route>
+
+    <Route path='/home' element={ <ProtectedRoute> <Home/> </ProtectedRoute>}></Route>
+   
     <Route path='/signin' element={<SignIn/>}></Route>
+    <Route path='/proflie' element={<ProtectedRoute> <Profile/> </ProtectedRoute> }></Route>
+    <Route path='/admin' element={<AdminLogin/>}></Route>
+    <Route path='/admin/dashboard' element={ <AdminHome/>}></Route>
 
    </Routes>
 

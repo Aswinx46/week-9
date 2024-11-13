@@ -52,7 +52,7 @@ const SignUp = () => {
             console.log('image is not uploaded')
           }
           const token= await axios.post('/signup',{...user,imageUrl:secureUrl})
-          dispatch(addToken(token.data.token))
+         
           console.log(user)
           navigate('/signin')
         } catch (error) {

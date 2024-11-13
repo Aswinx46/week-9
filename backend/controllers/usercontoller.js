@@ -22,7 +22,7 @@ const signup = async (req, res) => {
         const sPassword = await securedPassword(password);
         const existingUser = await User.findOne({ email: email})
         if (existingUser) {
-            res.status(400).json({ message: 'user already exist' })
+           return res.status(400).json({ message: 'user already exist' })
         }
           const newUser = new User({
               name: name,
@@ -36,7 +36,7 @@ const signup = async (req, res) => {
         const token= await jwt.sign({email:newUser.email},process.env.SECRET_KEY,(err,data)=>{
             try {
               
-                res.json({message:"account created",token:data})
+               return res.json({message:"account created",token:data})
             } catch (error) {
                 console.log(error)
             }
@@ -44,7 +44,7 @@ const signup = async (req, res) => {
 
 
         if (existingUser) {
-            res.status(400).json({ message: 'the email is already exist' })
+           return res.status(400).json({ message: 'the email is already exist' })
         }
 
     } catch (error) {
@@ -56,13 +56,13 @@ const signin=async(req,res)=>{
     const {email,password}=req.body;
     try {
         const user=await User.findOne({email:email})
-        if(!user) res.status(400).json({message:"user not found"});
+        if(!user) return res.status(400).json({message:"user not found"});
 
         const isPasswordValid=await bcrypt.compare(password,user.password)
-        if(!isPasswordValid) res.status(400).json({message:"invalid credentials"})
+        if(!isPasswordValid) return res.status(400).json({message:"invalid credentials"})
 
         const token=jwt.sign({email:user.email},process.env.SECRET_KEY,{expiresIn:'1h'})
-        res.json({user})
+       return  res.json({user,token})
         
     } catch (error) {
         console.log(error)
@@ -70,7 +70,20 @@ const signin=async(req,res)=>{
     }
 }
 
+const changeProfile=async(req,res)=>{
+    const{imageURL,email}=req.body;
+   
+    try {
+        const updateUser=await User.findOneAndUpdate({email},{imageURL},{new:true})
+        if(!updateUser) return res.status(400).json({messsage:"the user is not found"})
+        return res.status(200).json({message:'profile changed successfully',updateUser})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message:"server error"})
+    }
+}
 module.exports={
     signup,
-    signin
+    signin,
+    changeProfile
 }
