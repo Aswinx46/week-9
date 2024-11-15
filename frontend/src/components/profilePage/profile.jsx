@@ -5,14 +5,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import cloudaxios from 'axios'
 import axios from '../../axios/axios'
 import { username,email,imageURL } from '../../redux/slices/signinslice/userSlice';
+import Loading from '../spinner/Spinner';
 function profile() {
   const user=useSelector((state)=>state.user.user)
   const[image,setImage]=useState()
   const[error,setError]=useState()
-
+  const[isLoading,setIsLoading]=useState(false)
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const changeImage=async(e)=>{
+    setIsLoading(true)
     e.preventDefault()
     if(!image)return setError('no images ')
       const formdata=new FormData();
@@ -53,7 +55,7 @@ function profile() {
     <Link className="home-link"  to='/home'>BACK TO HOME</Link>
   </form>
 </div>
-
+    {isLoading && <Loading/>}
     </div>
   )
 }

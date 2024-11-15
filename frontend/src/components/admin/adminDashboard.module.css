@@ -39,7 +39,7 @@
   }
   
   .sidebar .navLinks li a {
-    color: #fff;
+    color: #050505;
     text-decoration: none;
     display: block;
     font-size: 16px;
@@ -52,7 +52,7 @@
   /* Main Content */
   .mainContent {
     flex-grow: 1;
-    background-color: #f4f4f4;
+    background-color: #faf6f6;
     padding: 20px;
   }
   
@@ -68,7 +68,7 @@
   }
   
   .statCard {
-    background-color: #fff;
+    background-color: #020202;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -88,6 +88,7 @@
   /* Recent Activity Section */
   .recentActivity {
     background-color: #fff;
+    color: black;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -111,4 +112,34 @@
   .recentActivity ul li:last-child {
     border-bottom: none;
   }
+
+  table {
+    width: 100%; /* Ensure table takes full width */
+    border-collapse: collapse; /* Remove extra space between cells */
+  }
   
+  th, td {
+    text-align: left; /* Align text to the left */
+    padding: 10px; /* Add spacing for better readability */
+  }
+  
+  th {
+    background-color: #f0f0f0; /* Differentiate headers */
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternate row color */
+  }
+  
+  img {
+    display: block;
+    
+  }
+ .addUser{
+  
+    position: relative;
+    top: 10px; /* Distance from bottom of viewport */
+    left: 3.5%;
+    transform: translateX(-50%);
+    background-color: rgb(100, 100, 247);
+ }

@@ -41,11 +41,7 @@ const signup = async (req, res) => {
                 console.log(error)
             }
         })
-
-
-        if (existingUser) {
-           return res.status(400).json({ message: 'the email is already exist' })
-        }
+       
 
     } catch (error) {
         console.log(error)

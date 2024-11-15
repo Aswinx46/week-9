@@ -15,7 +15,7 @@ function AdminLogin() {
     try {
       const admin=await axios.post('/admin',{email,password})
       console.log(admin)
-      dispatch(adminToken(admin.data.admin.token))
+      dispatch(adminToken(admin.data.token))
       dispatch(adminName(admin.data.admin.name))
       dispatch(adminPassword(password))
       

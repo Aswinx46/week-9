@@ -11,11 +11,16 @@ const Home = () => {
     const user=useSelector((state)=>state.user.user)
 
     const navigate=useNavigate()
+
+    const logout=()=>{
+      dispatch(removeToken())
+      navigate('/')
+    }
   return (
     <div className="home-container">
       <header className="header">
         <h2 style={{color:'black'}}>{ user&& `Welcome ${user.name}`}</h2>
-        <button onClick={()=>dispatch(removeToken())} className="logout-button">Log Out</button>
+        <button onClick={logout} className="logout-button">Log Out</button>
       </header>
       <Link to='/proflie' className="profile-link">Go to Profile</Link>
       <div className="profile-container">

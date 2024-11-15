@@ -9,7 +9,10 @@ import Home from './components/home/home'
 import ProtectedRoute from './components/protectedRoute/protectedRoute'
 import Profile from './components/profilePage/profile'
 import AdminLogin from './components/admin/adminLogin'
-import AdminHome from './components/admin/adminHome'
+import AdminHome from './components/admin/admindashboard'
+import AdminProtected from './components/adminProtected/adminProtected'
+import AdminEditUser from './components/admin/adminEditUser'
+import AddUser from './components/admin/addUser'
 function App() {
 
 
@@ -25,8 +28,9 @@ function App() {
     <Route path='/signin' element={<SignIn/>}></Route>
     <Route path='/proflie' element={<ProtectedRoute> <Profile/> </ProtectedRoute> }></Route>
     <Route path='/admin' element={<AdminLogin/>}></Route>
-    <Route path='/admin/dashboard' element={ <AdminHome/>}></Route>
-
+    <Route path='/admin/dashboard' element={ <AdminProtected> <AdminHome/> </AdminProtected> }></Route>
+    <Route path='/edit-user' element={<AdminProtected> <AdminEditUser/> </AdminProtected>}></Route>
+    <Route path='/add-user' element={<AdminProtected> <AddUser/> </AdminProtected>}></Route>
    </Routes>
 
    </BrowserRouter>

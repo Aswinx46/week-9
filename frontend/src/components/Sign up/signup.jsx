@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import axios from '../../axios/axios'
 import cloudaxios from 'axios'
 import { addToken } from '../../redux/slices/tokenslice/tokenslice';
-
+import Loading from '../spinner/Spinner';
 
 
 const SignUp = () => {
@@ -17,6 +17,8 @@ const SignUp = () => {
     const navigate=useNavigate()
     const dispatch=useDispatch()
     const[error,setError]=useState({})
+    const[isLoading,setIsLoading]=useState(false)
+    const[message,setMessage]=useState()
     let secureUrl=''
    
     
@@ -37,6 +39,7 @@ const SignUp = () => {
 
     const addingUser= async(e)=>{
       e.preventDefault()
+      setIsLoading(true)
       if(validation())
       {
         try {
@@ -56,7 +59,10 @@ const SignUp = () => {
           console.log(user)
           navigate('/signin')
         } catch (error) {
-          console.log(error)
+          console.log(error.response.data.message)
+          const mess=error.response.data.message
+          setMessage(mess)
+          
         }
       }
     
@@ -98,7 +104,10 @@ const SignUp = () => {
       <p>
         Already have an account? <Link to='/signin'>SIGN IN HERE</Link>
       </p>
+     <div style={{color:'white'}}>{ isLoading && <Loading />}</div> 
+     <span style={{paddingLeft:'120px',color:"red"}}>{message ? message : ''}</span>
     </div>
+    
   );
 };
 
